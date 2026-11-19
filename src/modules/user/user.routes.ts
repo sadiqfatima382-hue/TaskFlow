@@ -1,14 +1,13 @@
-
 import { Router } from "express";
 
 import { userController } from "./user.controller.js";
+import { registerUserSchema } from "./user.validation.js";
+import { validate } from "../middlewares/validate.js";
 
 const router = Router();
 
-// Register a new user
-router.post("/register", userController.registerUser);
+router.post("/register",  validate(registerUserSchema),  userController.registerUser);
 
-// Get user profile by ID
 router.get("/:id", userController.getUserById);
 
 export default router;
