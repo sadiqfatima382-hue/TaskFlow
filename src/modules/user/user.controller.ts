@@ -1,7 +1,7 @@
 
-import type { Request, Response, NextFunction } from "express";
+  import type { Request, Response, NextFunction } from "express";
 
-import { userService } from "./user.service.js";
+  import { userService } from "./user.service.js";
 
 interface RegisterUserBody {
   name: string;
@@ -10,9 +10,8 @@ interface RegisterUserBody {
 }
 
 class UserController {
-  // Register a new user
   registerUser = async (
-    req: Request<object, object, RegisterUserBody>,
+    req: Request<{}, {}, RegisterUserBody>,
     res: Response,
     next: NextFunction
   ): Promise<void> => {
@@ -33,7 +32,6 @@ class UserController {
     }
   };
 
-  // Get user profile by ID
   getUserById = async (
     req: Request<{ id: string }>,
     res: Response,
