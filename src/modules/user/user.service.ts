@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import {userRepository} from "./user.repository.js";
-
+import AppError from "../utils/app.error.js";
 interface RegisterUserInput {
     name: string;
     email: string;
@@ -14,7 +14,7 @@ class UserService {
      
      const existingUser = await userRepository.findUserByEmail(email);
      if (existingUser) {
-       throw new Error("User with this email already exists.");
+       throw new AppError("User with this email already exists.",409);
      }
 
      const hashedPassword = await bcrypt.hash(data.password, 10);
@@ -37,7 +37,7 @@ class UserService {
     async getUserById(id: string) {
         const user = await userRepository.findUserById(id);
         if (!user) {
-            throw new Error("User not found.");
+            throw new AppError("User not found.",404);
         }
         return user;
     }
