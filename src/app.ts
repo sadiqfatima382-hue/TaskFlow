@@ -1,6 +1,6 @@
 import express from "express";
 import userRoutes from "./modules/user/user.routes.js";
-
+import { errorMiddleware } from "./modules/middlewares/error.middleware.js";
 const app = express();
 
 // Global middleware
